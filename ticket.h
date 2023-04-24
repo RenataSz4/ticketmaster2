@@ -21,6 +21,7 @@ class Ticket {
         string catchphrase;
     public:
         Ticket (string, array <string, 4>, array <int, 4>, bool, string);
+        //      <artist>, <at>, <time>, [VIP = assumed false], [catchphrase = assumed empty]
         ~Ticket ();
 
         void setID (int);
