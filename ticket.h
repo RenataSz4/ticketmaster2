@@ -50,6 +50,8 @@ class Ticket {
         string getDate () const;
         string getCatchphrase () const;
 
+        void use ();
+
 };
 
 #include "ticket.cpp"
