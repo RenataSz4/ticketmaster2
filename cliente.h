@@ -29,7 +29,7 @@ class Cliente {
 
         int getID () const;
         string getPassword () const;
-        Ticket getTicket (int);
+        Ticket getTicket (int) const;
 
         void useTicket (int);
 };
