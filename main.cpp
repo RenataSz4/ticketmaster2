@@ -1,30 +1,57 @@
-#include "menu/menu.h"
+/*  nombre: Ticketmaster 2 (Main file)
+*   autor: David Emmanuel Santana Romero
+*   fecha: 31 de mayo de 2023
+*/
+
+#include "menu/menu.h" // library by David Emmanuel Santana Romero which allows for easy recursive menu implementation
 #include "cliente.h"
 #include "ticket.h"
-#include <string>
-#include <iostream>
+#include "tienda.h"
+#include <string> // text strings library
+#include <iostream> // input output stream library
+#include <fstream> // file stream library
 using namespace std;
 
 vector<Cliente> clientes;
+Tienda * tienda = new Tienda;
+int sessionID = -1;
+string logo = "   __  _      __        __                       __                ___\n  / /_(_)____/ /_____  / /_____ ___  ____ ______/ /____  _____    /_  |\n / __/ / ___/ //_/ _ \\/ __/ __ `__ \\/ __ `/ ___/ __/ _ \\/ ___/   __/ /\n/ /_/ / /__/ ,< /  __/ /_/ / / / / / /_/ (__  ) /_/  __/ /      / __/ \n\\__/_/\\___/_/|_|\\___/\\__/_/ /_/ /_/\\__,_/____/\\__/\\___/_/      /____/ \n                                                                      \n";
+
 void crearUsuario ();
 void iniciarSesion ();
+void sessionMenu ();
+void save ();
+void load ();
 
 Menu adminMenu ({
     // {}
 }, "MENÚ DEL ADMINISTRADOR");
 
 Menu clientMenu ({
-    {'1', {"Crear usuario", crearUsuario}},
-    {'2', {"Iniciar sesión", iniciarSesion}}
+    {'1', {"Iniciar sesión", iniciarSesion}},
+    {'2', {"Crear usuario", crearUsuario}}
 }, "MENÚ DEL CLIENTE");
 
 Menu mainMenu ({
-    {'1', {"Administrador", [] () { adminMenu.display(true, true); }}},
-    {'2', {"Cliente", [] () { clientMenu.display(true, true); }}}
-}, "MENÚ PRINCIPAL");
+    {'1', {"Cliente", [] () { clientMenu.display(true, true); }}},
+    {'2', {"Administrador", [] () { adminMenu.display(true, true); }}}
+}, logo + "MENÚ PRINCIPAL");
+
+Menu session ({
+        {'1', {"Inventario", [] () { clientes[sessionID].displayInventario (); } }},
+        {'2', {"Comprar", [] () { tienda->display (clientes[sessionID]); } }}
+});
 
 int main () {
+    load ();
+    cout << "CLIENTES: " << clientes.size() << endl;
     mainMenu.display(true, true);
+    cout << logo << endl;
+    cout << "Guardando datos y limpiando la memoria ..." << endl;
+    delete [] tienda;
+    tienda = NULL;
+    save ();
+    return 0;
 }
 
 void crearUsuario () {
@@ -32,10 +59,16 @@ void crearUsuario () {
     string pswd;
     do {
         cout << "Contraseña: ";
-        getline(cin, pswd);
+        cin >> pswd;
+        getchar();
     } while (pswd.size() < 8 || pswd.size() > 30);
+    float bono = 1 + rand () % 1000;
     clientes.emplace_back(pswd);
+    clientes.back().setCash(bono);
+    cout << "El ID del nuevo usuario es: " << clientes.back().getID() << endl;
+    cout << "Bono por crear cuenta: +$" << bono << endl;
 }
+
 void iniciarSesion () {
     int id;
     string pswd;
@@ -54,5 +87,30 @@ void iniciarSesion () {
         cout << "Contraseña: ";
         getline(cin, pswd);
     }
+    float bono = 1 + rand () % 500;
+    sessionID = id-1;
+    clientes[sessionID].setCash(clientes[sessionID].getCash() + bono);
     cout << "Sesión iniciada" << endl;
+    cout << "Bono por iniciar sesión: +$" << bono << endl;
+    session.display(true, true);
+    sessionID = -1;
+}
+
+void save () {
+    ofstream file ("clientes.txt");
+    for (const auto x : clientes) {
+        file << x.getPassword() << endl;
+    }
+    file.close();
+}
+
+void load () {
+    ifstream file ("clientes.txt");
+    while (file.good()) {
+        string pswd;
+        file >> pswd;
+        if (pswd.empty()) continue;
+        clientes.emplace_back(pswd);
+    }
+    file.close();
 }

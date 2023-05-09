@@ -11,9 +11,10 @@ using namespace std;
 
 int Ticket :: objectCount = 0;
 
-Ticket :: Ticket (string artist, bool VIP = false, string catchphrase = "♫", array <int, 4> time = {2023, 6, 9, 12}, array <string, 4> at = {"México", "Baja California", "Tijuana", "Estadio de los Xolos"}) {
+Ticket :: Ticket (string artist, bool VIP = false, float price = 50.00, string catchphrase = "♫", array <int, 4> time = {2023, 6, 9, 12}, array <string, 4> at = {"México", "Baja California", "Tijuana", "Estadio de los Xolos"}) {
     this -> artist = artist;
     this -> VIP = VIP;
+    this -> price = price;
     this -> catchphrase = catchphrase;
     this -> time = time;
     this -> at = at;
@@ -22,6 +23,7 @@ Ticket :: Ticket (string artist, bool VIP = false, string catchphrase = "♫", a
 }
 
 Ticket :: Ticket () {
+    price = 50;
     artist = "Chayanne";
     VIP = false;
     catchphrase = "Quiero ser torero";
@@ -40,6 +42,9 @@ Ticket :: ~Ticket () {
 
 void Ticket :: setID (int x) {
     ID = x;
+}
+void Ticket :: setPrice (float x) {
+    price = x;
 }
 void Ticket :: setVIP (bool x) {
     VIP = x;
@@ -102,6 +107,9 @@ void Ticket :: setCatchphrase (string x) {
 int Ticket :: getID () const {
     return ID;
 }
+float Ticket :: getPrice () const {
+    return price;
+}
 bool Ticket :: getVIP () const {
     return VIP;
 }
@@ -142,5 +150,11 @@ string Ticket :: getCatchphrase () const {
 void Ticket :: use () {
     cout << catchphrase << endl;
     cout << "BOLETO CON ID " << ID << " UTILIZADO." << endl;
-    Ticket :: ~Ticket();
+}
+
+void Ticket :: display () {
+    cout << "[BOLETO] ID: " << getID () << ", VIP: " << (getVIP () ? "Sí" : "No") << ", Artista: " << getArtist () << endl;
+    cout << "\tLugar: " << getAtCountry () << ", " << getAtState () << ", " << getAtCity () << ", " << getAtEventPlace () << endl;
+    cout << "\tFecha: " << getDate () << endl;
+    cout << endl;
 }

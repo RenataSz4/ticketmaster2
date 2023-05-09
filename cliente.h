@@ -9,27 +9,28 @@
 #include <string>
 #include <vector>
 #include "ticket.h"
+#include "holder.h"
 using namespace std;
 
-class Cliente {
+class Cliente : public Holder {
     private:
         static int objectCount;
         int ID;
+        float cash;
         string password;
-        vector <Ticket> inventario;
     public:
         Cliente (string);
         ~Cliente ();
 
         void setID (int);
+        void setCash (float);
         void setPassword (string);
-        void setInventario (vector <Ticket>);
-        void addTicket (Ticket);
-        void deleteTicket (int);
 
         int getID () const;
+        float getCash () const;
+        void displayCash () const;
         string getPassword () const;
-        Ticket getTicket (int) const;
+        void displayInventario ();
 
         void useTicket (int);
 };

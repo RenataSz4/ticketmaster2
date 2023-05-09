@@ -27,11 +27,11 @@ void Menu :: press (bool loop = false) {
     bool found = false;
     cout << ">> ";
     cin >> key;
+    getchar();
     system ("cls");
     if (key == 45) {
         return;
     }
-    getchar();
     for (const auto &i : options) {
         if (i.first == key) {
             found = true;
