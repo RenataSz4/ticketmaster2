@@ -1,4 +1,4 @@
-/*  nombre: Cliente
+/*  nombre: Holder (abstracta)
     contribuidores: David Emmanuel Santana Romero
     fecha: 9 de mayo de 2023
 */
