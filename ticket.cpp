@@ -30,7 +30,7 @@ Ticket :: Ticket () {
     setID(++objectCount);
 }
 
-Ticket :: ~Ticket () {
+Ticket :: ~Ticket() {
     artist = "";
     VIP = false;
     catchphrase = "";
