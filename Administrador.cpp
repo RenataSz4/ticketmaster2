@@ -135,55 +135,15 @@ void Administrador::ocultarPassword(){
         {
             if(c == '\b') // Si se presiona la tecla de retroceso
             {
-                password.erase(password.size() - 1); // Eliminar el último caracter de la contraseña
-                std::cout << "\b \b"; // Retroceder para borrar el asterisco y avanzar para volver a ocultar la contraseña
+                password.erase(password.size() - 1); // Eliminar el Ãºltimo caracter de la contraseÃ±a
+                std::cout << "\b \b"; // Retroceder para borrar el asterisco y avanzar para volver a ocultar la contraseÃ±a
             }
-            else // Si se ingresa un caracter válido
+            else // Si se ingresa un caracter vÃ¡lido
             {
-                password += c; // Agregar el caracter a la contraseña
+                password += c; // Agregar el caracter a la contraseÃ±a
                 std::cout << "*"; // Mostrar un asterisco en lugar del caracter ingresado
             }
         }
-    }while (password.size() > 10);//el tamaño de la contraseña debe ser de 8 carcteres
+    }while (password.size() > 10);//el tamaÃ±o de la contraseÃ±a debe ser de 8 carcteres
 }
 
-/**void Administrador::crearEvento(){
-    evento e1;
-    std::string nombre_evento;
-    int dia, mes, year;
-    std::string lugar;
-    std::string artista;
-    std::string direccion;
-    int hora, minuto;
-    std::cout << "Nombre del Evento: "; getline(std::cin,nombre_evento);
-    e1.setNombre(nombre);
-    std::cout << "Fecha del Evento: (dd/mm/yyyy)" << std::endl;
-    char c; //para leer el caracter "/"
-    cin >> dia >> c >> mes >> c >> year;
-    e1.setFecha(dia,mes,year);
-    std::cout << "Lugar del evento: "; getline(std::cin,lugar);
-    e1.setLugar(lugar);
-    std::cout << "Artista: "; getline(std::cin,artista);
-    e1.setArtista(artista);
-    std::cout << "Direccion: "; getline(std::cin,direccion);
-    e1.setDireccion(direccion);
-    std::cout << "Horario del evento (00:00): ";
-    std::cin >> hora >> c >> minuto;
-    e1.setHorario(hora,minuto);
-    std::cout << std::endl;
-}
-
-//despliega informacion del cliente
-void Administrador::informacionClientes(){
-    //cambiar nombre de funciones
-    std::cout << "BASE DE DATOS" << std::endl;
-    for(Cliente i : clientes){
-        std::cout << "ID: " << i.getID();
-        //std::cout << "Nombre: " << i.getNombre();
-        //std::cout << "Telefono: " << i.getTelefono();
-        //std::cout << "Correo: " << i.getCorreo();
-        std::cout << std::endl;
-        std::cout << std::endl;
-    }
-}
-**/
