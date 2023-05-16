@@ -11,7 +11,8 @@ void crearUsuario ();
 void iniciarSesion ();
 
 Menu adminMenu ({
-    // {}
+    {'1', {"Crear Administrador", Administrador::crearAdministrador}},
+    {'2', {"Iniciar sesión", Administrador::iniciarSesion}}
 }, "MENÚ DEL ADMINISTRADOR");
 
 Menu clientMenu ({
