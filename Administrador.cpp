@@ -1,6 +1,6 @@
-/** nombre: Administrador
-    colaboradores: Renata Flores
-    fecha: 30 de abril de 2023 **/
+/** Nombre: Administrador
+    Colaboradores: Renata Flores
+    Fecha: 30 de abril de 2023 **/
 
 #include "Administrador.h"
 #include <string>
